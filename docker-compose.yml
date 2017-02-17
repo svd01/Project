@@ -6,6 +6,7 @@ services:
     image: redmine:3.3
     ports:
       - 8080:3000
+
     environment:
       REDMINE_DB_MYSQL: db
       REDMINE_DB_PORT: 3306
@@ -17,7 +18,10 @@ services:
     restart: always
 
   db:
+    user: mysql
     image: mariadb
+    volumes:
+      - ./db/data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_USER: ${DB_USERNAME}
